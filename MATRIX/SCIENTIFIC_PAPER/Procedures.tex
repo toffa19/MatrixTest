@@ -1,0 +1,73 @@
+\documentclass{article} \usepackage{hyperref}
+
+\begin{document}
+
+\section{Procedures for Running the Algorithms}
+
+\subsection{1. Python} To run the Python code, you need to have Python installed and set up an Anaconda environment with the necessary libraries.
+
+\textbf{Steps:}
+
+\textbf{Install Python:}
+
+Download and install \textbf{Anaconda} following the instructions for your operating system from \url{https://www.anaconda.com/products/distribution}.
+\textbf{Create a Conda Environment:}
+
+Open the terminal (or Anaconda Prompt) and create a new environment with the following command: \begin{verbatim} conda create --name matrix-env python=3.9 \end{verbatim}
+Activate the created environment: \begin{verbatim} conda activate matrix-env \end{verbatim}
+\textbf{Install Necessary Libraries:}
+
+Install the required libraries (e.g., NumPy for matrix manipulation): \begin{verbatim} pip install numpy \end{verbatim}
+\textbf{Run the Python Code:}
+
+Navigate to the folder containing your Python script (e.g., \texttt{matrix.py}) and execute the following command: \begin{verbatim} python matrix.py \end{verbatim}
+The results will be displayed in the console.
+\subsection{2. C} To compile and run the C code, you need to have the necessary libraries installed.
+
+\textbf{Steps:}
+
+\textbf{Install a C Compiler:}
+
+Ensure you have a C compiler such as \textbf{MinGW} for Windows. During installation, select options to include the binary files in your PATH.
+\textbf{Compile the C Code:}
+
+Open the command prompt (cmd) and navigate to the folder containing your C file (e.g., \texttt{matrix.c}). Compile the code with the following command: \begin{verbatim} gcc matrix.c -o matrix.exe \end{verbatim}
+\textbf{Run the C Code:}
+
+After compilation, execute the generated file: \begin{verbatim} matrix.exe \end{verbatim}
+\textbf{Compare Results:}
+
+Once the code is running, the results of the matrix multiplication will be displayed in the terminal.
+\subsection{3. Java} Running the Java code is different as it uses JMH (Java Microbenchmark Harness) for benchmarking. You need to install Maven and configure the project.
+
+\textbf{Steps:}
+
+\textbf{Install Maven:}
+
+Download Maven from \url{https://maven.apache.org/download.cgi} and follow the instructions for setting it up on your system.
+\textbf{Create a Maven Folder:}
+
+Open the terminal and create a new folder for your project: \begin{verbatim} mvn archetype
+-DgroupId=com.example -DartifactId=matrix-benchmark -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false \end{verbatim}
+This command creates a predefined directory structure for a Maven project.
+\textbf{Navigate to the Project Folder:}
+
+Change into the created folder: \begin{verbatim} cd matrix-benchmark \end{verbatim}
+\textbf{Project Structure:}
+
+The folder contains subdirectories like \texttt{src/main/java} for source code and \texttt{src/test/java} for tests. You can place your benchmarking code inside \texttt{src/main/java/com/example}.
+\textbf{Use Maven Commands:}
+
+Run the following commands to prepare the project: \begin{verbatim} mvn clean install package \end{verbatim}
+\textbf{Explanation of commands:}
+\texttt{clean}: removes previous build files.
+\texttt{install}: compiles the project and installs the package in the local repository.
+\texttt{package}: creates an executable JAR file for the project.
+\textbf{Run the JAR:}
+
+To execute the benchmark, use the command: \begin{verbatim} java -jar target/matrix-benchmark-1.0-SNAPSHOT.jar \end{verbatim}
+\textbf{Warmup and Interactions:}
+
+Warmup executions prepare the JVM and reduce noise in the results. Interactions are the actual benchmarking tests during which the performance of the algorithm is measured.
+\end{document}
+

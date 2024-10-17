@@ -1,0 +1,141 @@
+\documentclass{article}
+\usepackage{booktabs}
+
+\begin{document}
+
+\title{Summary of Benchmark Results for Matrix Multiplication}
+\author{}
+\date{}
+\maketitle
+
+\section{Python Results}
+
+\subsection{Summary of Averages}
+\begin{itemize}
+    \item Execution time for 256x256: 2.75 seconds
+    \item Execution time for 128x128: 0.82 seconds
+    \item Execution time for 64x64: 0.11 seconds
+    \item Average CPU usage for 128x128: 8.68\%
+    \item Average CPU usage for 64x64: 10.26\%
+\end{itemize}
+
+\subsection{Memory Usage for Matrices}
+\begin{itemize}
+    \item 128x128:
+        \begin{itemize}
+            \item Current memory usage: 554560 bytes
+            \item Maximum memory usage: 554720 bytes
+        \end{itemize}
+    \item 64x64:
+        \begin{itemize}
+            \item Current memory usage: 140768 bytes
+            \item Maximum memory usage: 140928 bytes
+        \end{itemize}
+\end{itemize}
+
+\subsection{Execution Times for Matrices}
+\begin{itemize}
+    \item 256x256: 
+        \begin{itemize}
+            \item 2.954234 s, 2.413932 s, 2.963056 s, 2.723877 s, 2.687829 s
+        \end{itemize}
+    \item 128x128: 
+        \begin{itemize}
+            \item 0.831150 s, 0.835084 s, 0.793739 s, 0.835359 s, 0.807931 s
+        \end{itemize}
+    \item 64x64: 
+        \begin{itemize}
+            \item 0.131083 s, 0.102994 s, 0.097095 s, 0.100709 s, 0.121288 s, 0.113997 s
+        \end{itemize}
+\end{itemize}
+
+\subsection{Other Measurements}
+\begin{itemize}
+    \item Execution time for 512x512 matrices: 206.413062 s
+    \item Current memory usage: 8480272 bytes
+    \item Maximum memory usage: 8480576 bytes
+    \item Average CPU usage: 8.8\%
+\end{itemize}
+
+\section{C++ Results}
+
+\subsection{Execution Times}
+\begin{itemize}
+    \item 64x64:
+        \begin{itemize}
+            \item 12.105 ms, 10.996 ms, 6.080 ms, 9.996 ms, 11.996 ms
+        \end{itemize}
+    \item 128x128:
+        \begin{itemize}
+            \item 62.314 ms, 59.965 ms, 71.952 ms, 40.288 ms, 53.981 ms
+        \end{itemize}
+    \item 256x256:
+        \begin{itemize}
+            \item 315.594 ms, 310.355 ms, 315.416 ms, 338.162 ms, 358.637 ms
+        \end{itemize}
+    \item 512x512: 2426.82 ms
+    \item 1024x1024: 61003.2 ms
+\end{itemize}
+
+\subsection{Memory Usage}
+\begin{itemize}
+    \item 64x64: 98304 bytes (constant)
+    \item 128x128: 393216 bytes (constant)
+    \item 256x256: 1572864 bytes (constant)
+    \item 512x512: 6291456 bytes
+    \item 1024x1024: 25165824 bytes
+\end{itemize}
+
+\section{Java Results}
+
+\subsection{Execution Times for 1024x1024 Matrices}
+\begin{itemize}
+    \item Average Execution Times:
+        \begin{itemize}
+            \item Iteration 1: 4426.33 ms
+            \item Iteration 2: 5020.50 ms
+            \item Iteration 3: 4231.67 ms
+            \item Iteration 4: 4186.33 ms
+            \item Iteration 5: 4211.33 ms
+        \end{itemize}
+    \item Total Average: 4215.23 ms/op
+\end{itemize}
+
+\subsection{Memory Usage}
+\begin{itemize}
+    \item Total average memory usage:
+        \begin{itemize}
+            \item Iteration 1: 10485818.67 bytes
+            \item Iteration 2: 10587198.67 bytes
+            \item Iteration 3: 10483625.33 bytes
+            \item Iteration 4: 10485734.00 bytes
+            \item Iteration 5: 10330496.00 bytes
+        \end{itemize}
+    \item Total average: 10484574.134 bytes
+\end{itemize}
+
+\subsection{Matrix 64x64}
+\begin{itemize}
+    \item Average time per operation: 0.321 ms/op
+    \item Range: [0.139 ms, 0.504 ms] (99.9\% CI)
+    \item Minimum: 0.281 ms
+    \item Maximum: 0.404 ms
+    \item Standard deviation: 0.048 ms
+\end{itemize}
+
+\subsection{Matrix 128x128}
+\begin{itemize}
+    \item Average execution time: 3.400 ms/op
+    \item Memory allocation rate: 37.652 MB/sec
+    \item Memory allocation per operation: 133672.957 B/op
+\end{itemize}
+
+\subsection{Matrix 256x256}
+\begin{itemize}
+    \item Average execution time: 39.841 ms/op
+    \item Memory allocation rate: 12.179 MB/sec
+    \item GC count: 5
+    \item Total GC time: 8 ms
+\end{itemize}
+
+\end{document}
