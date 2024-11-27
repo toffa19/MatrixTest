@@ -1,2 +1,1 @@
-git clone https://github.com/yourusername/matrix-multiplication-benchmarking.git
-cd matrix-multiplication-benchmarking
+https://github.com/toffa19/MatrixTest/blob/task3/TASK3/GITHUB_link.txt
