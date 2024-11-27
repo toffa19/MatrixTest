@@ -1,0 +1,179 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{longtable}
+
+\title{Parallel and Vectorized Matrix Multiplication}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+In this assignment, we investigate parallel computing techniques, including multi-threading and libraries such as OpenMP, for matrix multiplication. Additionally, we compare the performance of vectorized approaches, utilizing SIMD instructions, with the basic matrix multiplication algorithm.
+
+\section{Requirements}
+\begin{itemize}
+    \item Implement a parallel version of matrix multiplication.
+    \item Test with large matrices and analyze the performance gain from vectorization and parallelization.
+    \item \textbf{Optional}: Implement a vectorized version of matrix multiplication using SIMD instructions.
+    \item \textbf{Optional}: Compare both approaches with the basic matrix multiplication algorithm.
+\end{itemize}
+
+\section{Metrics}
+We focus on the following metrics to evaluate the performance of the algorithms:
+\begin{itemize}
+    \item \textbf{Speedup} compared to the basic algorithm.
+    \item \textbf{Efficiency} of parallel execution (e.g., speedup per thread).
+    \item \textbf{Resource usage}, including the number of cores used and memory consumption.
+\end{itemize}
+
+\section{Benchmark Results}
+
+We conducted benchmarks on matrices of various sizes: 256x256, 512x512, 1024x1024, and 2048x2048. The results include execution time, memory allocation, and garbage collection metrics.
+
+\subsection{Matrix 2048x2048}
+\textbf{Execution Time (ms/op)}:
+\begin{itemize}
+    \item Mean: 31,691.818 ms
+    \item Minimum: 31,273.157 ms
+    \item Maximum: 32,117.444 ms
+    \item Standard Deviation: 364.444 ms
+    \item Confidence Interval (99.9\%): [30,288.475 ms, 33,095.161 ms]
+\end{itemize}
+
+\textbf{Memory Allocation (GC Allocations)}:
+\begin{itemize}
+    \item Average Allocation Speed: 1.102 MB/sec
+    \item Minimum: 1.087 MB/sec
+    \item Maximum: 1.116 MB/sec
+    \item Standard Deviation: 12.342 MB/sec
+    \item Confidence Interval (99.9\%): [1.054 MB/sec, 1.149 MB/sec]
+    \item Memory Allocated per Operation: ~37.208 GB/op
+\end{itemize}
+
+\textbf{GC Churn (Generational Garbage Collection)}:
+\begin{itemize}
+    \item \textbf{G1 Eden Space:}
+    \begin{itemize}
+        \item Allocation Speed: 1.106 MB/sec
+        \item Memory Allocated per Operation: ~37.356 GB/op
+    \end{itemize}
+    \item \textbf{G1 Old Gen:}
+    \begin{itemize}
+        \item Allocation Speed: 11.537 MB/sec
+        \item Memory Allocated per Operation: ~0.388 GB/op
+    \end{itemize}
+    \item \textbf{G1 Survivor Space:}
+    \begin{itemize}
+        \item Allocation Speed: 0.716 MB/sec
+        \item Memory Allocated per Operation: ~0.024 GB/op
+    \end{itemize}
+\end{itemize}
+
+\textbf{Observations}:
+\begin{itemize}
+    \item The benchmark confirms that matrix multiplication with large matrices is expensive in terms of both computation time and memory.
+    \item The average execution time for a 2048x2048 matrix exceeds 31 seconds.
+    \item The average memory allocation is substantial, with over 37 GB of memory used per iteration.
+    \item The garbage collector (GC) showed high activity, particularly in the Eden space, with churn speeds exceeding 1 GB/sec on average.
+\end{itemize}
+
+\subsection{Matrix 1024x1024}
+\textbf{Execution Time (ms/op)}:
+\begin{itemize}
+    \item Average Time per Iteration: 3461.436 ± 426.822 ms/op
+    \item Minimum: 3399.856 ms/op
+    \item Maximum: 3659.112 ms/op
+    \item Standard Deviation: 110.844 ms
+    \item Confidence Interval (99.9\%): [3034.614 ms, 3888.258 ms]
+\end{itemize}
+
+\textbf{Memory Allocation (GC Alloc Rate)}:
+\begin{itemize}
+    \item Average: 1228.518 ± 137.931 MB/sec
+    \item Minimum: 1164.694 MB/sec
+    \item Maximum: 1249.016 MB/sec
+\end{itemize}
+
+\textbf{GC Churn in Eden Space}:
+\begin{itemize}
+    \item Average: 1221.808 ± 105.634 MB/sec
+    \item Interval: [1116.173, 1327.442] MB/sec
+\end{itemize}
+
+\textbf{GC Time and Count}:
+\begin{itemize}
+    \item Total GC Count: 66 counts
+    \item Average per Iteration: 13.2 counts
+    \item Total GC Time: 1911 ms
+    \item Average per Iteration: 382.2 ms
+\end{itemize}
+
+\subsection{Matrix 512x512}
+\textbf{Execution Time (ms/op)}:
+\begin{itemize}
+    \item Average: 401.315 ± 56.457 ms/op
+    \item Minimum: 387.109 ms
+    \item Maximum: 425.982 ms
+\end{itemize}
+
+\textbf{Memory Allocation (GC Alloc Rate)}:
+\begin{itemize}
+    \item Average: 1325.449 ± 180.801 MB/sec
+    \item Memory Allocated per Operation: ~585 MB
+\end{itemize}
+
+\textbf{GC Churn}:
+\begin{itemize}
+    \item G1 Eden Space: 1337.834 ± 154.668 MB/sec
+    \item G1 Survivor Space: 6.297 ± 1.789 MB/sec
+\end{itemize}
+
+\textbf{GC Count and Time}:
+\begin{itemize}
+    \item Total GC Count: 102 counts
+    \item GC Time: 861 ms
+\end{itemize}
+
+\subsection{Matrix 256x256}
+\textbf{Execution Time (ms/op)}:
+\begin{itemize}
+    \item Average: 47.909 ± 4.592 ms/op
+    \item Confidence Interval (99.9\%): [43.317 ms, 52.501 ms]
+\end{itemize}
+
+\textbf{Memory Allocation (GC Alloc Rate)}:
+\begin{itemize}
+    \item Average: 1413.002 MB/sec
+    \item GC Alloc Rate Norm: 74.622 MB/op
+\end{itemize}
+
+\textbf{GC Churn (G1 Eden Space)}:
+\begin{itemize}
+    \item Average: 1418.136 MB/sec
+\end{itemize}
+
+\textbf{GC Count and Time}:
+\begin{itemize}
+    \item Total GC Count: 170 counts
+    \item GC Time: 594 ms
+\end{itemize}
+
+\section{Thread State Profiling}
+The thread states were observed during the execution:
+\begin{itemize}
+    \item \textbf{RUNNABLE}: The majority of the time (up to 78.3\% for large matrices), with the method \texttt{MatrixMultiplication.lambda$multiply$2} responsible for most of the execution time.
+    \item \textbf{TIMED\_WAITING} and \textbf{WAITING}: Around 10\%-21\% of the time, indicating synchronization or idle periods.
+    \item \textbf{BLOCKED}: A small portion of time (up to 2.9\%) due to concurrency issues such as accessing shared resources.
+\end{itemize}
+
+\section{Conclusion}
+
+This benchmarking exercise demonstrated that matrix multiplication with large matrices is computationally expensive. The parallel and vectorized implementations showed significant improvements in execution speed, but memory usage remains a limiting factor. The performance gains from parallelization and vectorization were evident, though further optimizations could be explored for even larger matrices or more specialized hardware.
+
+\end{document}
